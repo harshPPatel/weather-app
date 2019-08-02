@@ -26,11 +26,10 @@ export default {
       await API.getWeather(this.location.lang, this.location.lat)
         .then((res) => {
           this.forecast = res;
-          this.setLocalData();
+          this.saveDataToLocalStorage();
         });
     },
-    setLocalData() {
-      // Saving location to localStorage
+    saveDataToLocalStorage() {
       const location = {
         lat: this.location.lat,
         lang: this.location.lang,
@@ -39,38 +38,75 @@ export default {
       localStorage.setItem('location', JSON.stringify(location));
       localStorage.setItem('forecast', JSON.stringify(this.forecast));
     },
+    fetchData(res) {
+      // Setting data
+      this.location.lat = res.coords.latitude;
+      this.location.lang = res.coords.longitude;
+
+      // Checking for location in localStorage
+      if (localStorage.getItem('location')) {
+        const localLocation = JSON.parse(localStorage.getItem('location'));
+
+        // Checking if new location is same as localLocation or not
+        if (
+          localLocation.lat === this.location.lat
+          && localLocation.lang === this.location.lang
+        ) {
+          this.address = localLocation.address;
+        } else {
+          API.getAddress(this.location.lat, this.location.lang)
+            .then((response) => { this.address = response.name; });
+        }
+      } else {
+        API.getAddress(this.location.lat, this.location.lang)
+          .then((response) => { this.address = response.name; });
+      }
+
+      // Checking if forecast exists in localStorage
+      if (localStorage.getItem('forecast')) {
+        const localForecast = JSON.parse(localStorage.getItem('forecast'));
+
+        // Checking if localForecast's long and lat is same as state
+        if (
+          localForecast.latitude === this.location.lat
+          && localForecast.longitude === this.location.lang
+        ) {
+          // Setting localForecast to state
+          this.forecast = localForecast;
+        } else {
+          // Fetching data from API
+          this.getWeatherData();
+        }
+      } else {
+        // Fetching data from API
+        this.getWeatherData();
+      }
+    },
+    setDefaultData() {
+      const localLocation = localStorage.getItem('location');
+      if (localLocation) {
+        const { lat, lang, address } = JSON.parse(localLocation);
+        this.location.lat = lat;
+        this.location.lang = lang;
+        this.address = address;
+        if (localStorage.getItem('forecast')) {
+          this.forecast = JSON.parse(localStorage.getItem('forecast'));
+        }
+      } else {
+        this.location.lat = '40.730610';
+        this.location.lang = '-73.935242';
+        this.address = 'New York City, NY';
+        this.getWeatherData();
+      }
+    },
   },
   mounted() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((res) => {
-        this.location.lat = res.coords.latitude;
-        this.location.lang = res.coords.longitude;
-        if (!localStorage.getItem('location')) {
-          API.getAddress(this.location.lat, this.location.lang)
-            .then((response) => { this.address = response.name; });
-        } else {
-          this.address = JSON.parse(localStorage.getItem('location')).address;
-        }
-        if (!localStorage.getItem('forecast')) {
-          this.getWeatherData();
-        } else {
-          this.forecast = JSON.parse(localStorage.getItem('forecast'));
-        }
-      }, () => {
-        const localLocation = localStorage.getItem('location');
-        this.location.lat = localLocation ? JSON.parse(localLocation).lat : '40.730610';
-        this.location.lang = localLocation ? JSON.parse(localLocation).lang : '-73.935242';
-        this.address = localLocation ? JSON.parse(localLocation).address : 'New York City, NY';
-        if (localStorage.getItem('forecast')) {
-          this.forecast = JSON.parse(localStorage.getItem('forecast'));
-        } else {
-          this.getWeatherData();
-        }
-      });
+      navigator.geolocation.getCurrentPosition(this.fetchData, this.setDefaultData);
     }
   },
   updated() {
-    this.setLocalData();
+    this.saveDataToLocalStorage();
   },
 };
 </script>
