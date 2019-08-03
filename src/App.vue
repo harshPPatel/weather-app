@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <navbar :location="address" v-on:refresh="getWeatherData" />
+    <Navbar :location="address" v-on:refresh="getWeatherData" />
+    <main-data :forecast="forecast" v-if="forecast" />
   </div>
 </template>
 
 <script>
-import navbar from './components/Navbar.vue';
+import Navbar from './components/Navbar.vue';
+import MainData from './components/MainData.vue';
 import API from './lib/API';
 
 export default {
@@ -19,7 +21,8 @@ export default {
     forecast: null,
   }),
   components: {
-    navbar,
+    Navbar,
+    MainData,
   },
   methods: {
     async getWeatherData() {
@@ -77,10 +80,9 @@ export default {
           // Fetching data from API
           this.getWeatherData();
         }
-      } else {
-        // Fetching data from API
-        this.getWeatherData();
       }
+      // Fetching data from API
+      this.getWeatherData();
     },
     setDefaultData() {
       const localLocation = localStorage.getItem('location');
