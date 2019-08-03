@@ -2,12 +2,14 @@
   <div id="app">
     <Navbar :location="address" v-on:refresh="getWeatherData" />
     <main-data :forecast="forecast" v-if="forecast" />
+    <week-data-list v-if="forecast" :dailyData="forecast.daily.data" />
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
 import MainData from './components/MainData.vue';
+import WeekDataList from './components/WeekDataList.vue';
 import API from './lib/API';
 
 export default {
@@ -23,6 +25,7 @@ export default {
   components: {
     Navbar,
     MainData,
+    WeekDataList,
   },
   methods: {
     async getWeatherData() {
