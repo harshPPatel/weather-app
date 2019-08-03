@@ -43,6 +43,7 @@ export default {
       };
       localStorage.setItem('location', JSON.stringify(location));
       localStorage.setItem('forecast', JSON.stringify(this.forecast));
+      localStorage.setItem('timestamp', new Date());
     },
     fetchData(res) {
       // Setting data
@@ -69,12 +70,17 @@ export default {
       }
 
       // Checking if forecast exists in localStorage
-      if (localStorage.getItem('forecast')) {
+      if (localStorage.getItem('timestamp') && localStorage.getItem('forecast')) {
         const localForecast = JSON.parse(localStorage.getItem('forecast'));
+
+        // Checking localStorage's timestamp validity
+        const dataTimestamp = new Date(localStorage.getItem('timestamp'));
+        const currentDate = new Date();
 
         // Checking if localForecast's long and lat is same as state
         if (
-          localForecast.latitude === this.location.lat
+          dataTimestamp.getDate() === currentDate.getDate()
+          && localForecast.latitude === this.location.lat
           && localForecast.longitude === this.location.lang
         ) {
           // Setting localForecast to state
