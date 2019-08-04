@@ -11,7 +11,8 @@
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
-    "vue-skycons": "^1.0.5"
+    "vue-weathericons": "0.0.3",
+    "weathericons": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",

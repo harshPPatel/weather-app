@@ -12,7 +12,6 @@ import CurrentData from './CurrentData.vue';
 export default {
   name: 'MainData',
   props: ['forecast'],
-  data: () => ({}),
   components: {
     SunTimeData,
     CurrentData,
