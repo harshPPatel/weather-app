@@ -18,7 +18,7 @@ export const dateConverter = (unixDate) => {
   return `${hours}:${minutes} ${timePeriod}`;
 };
 
-export const tempConverter = fTemp => (((fTemp - 32) * (5 / 9)).toFixed(2));
+export const tempConverter = fTemp => (((fTemp - 32) * (5 / 9)).toFixed(0));
 
 export default {
   dateConverter,

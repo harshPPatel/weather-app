@@ -3,12 +3,12 @@
     <div class="main_info_section">
       <div class="icon">
         <div class="svg_container">
-          <!-- Add SVG Here -->
-          ICON
+          <skycon :condition="forecast.currently.icon" height=115 width=115 />
         </div>
       </div>
       <div class="temp">
-        <h1>{{ temp }}</h1>
+        <h1>{{ temp }}&deg; C</h1>
+        <p>{{ forecast.currently.summary }}</p>
       </div>
     </div>
     <div class="secondary_info_section">
@@ -42,6 +42,36 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .main_info_section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 40px;
 
+    .icon {
+      margin-right: 32px;
+    }
+
+    .temp {
+      text-align: left;
+      h1 {
+        font-size: 64px;
+      }
+      p {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .secondary_info_section {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p:not(:last-of-type) {
+      margin-right: 24px;
+    }
+  }
 </style>

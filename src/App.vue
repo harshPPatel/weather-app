@@ -155,7 +155,7 @@ body {
       background: #4776E6;
       background: -webkit-linear-gradient(to left, #8E54E9, #4776E6);
       background: linear-gradient(to left, #8E54E9, #4776E6);
-      opacity: 0.85;
+      opacity: 0.95;
       * {
         color: #fff;
       }

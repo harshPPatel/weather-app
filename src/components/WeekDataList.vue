@@ -21,6 +21,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .container {
+    padding-top: 8%;
+  }
 </style>
