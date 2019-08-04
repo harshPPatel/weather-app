@@ -2,13 +2,13 @@
   <div class="sun_timings">
     <p class="sunrise">
       <span class="svg_container">
-        <!-- Add SVG -->
+        <img src="../assets/icons/sunrise.svg" alt="sunrise icon">
       </span>
       <strong>Sun Rise </strong> : {{ sunrise }}
     </p>
     <p class="sunset">
       <span class="svg_container">
-        <!-- Add SVG -->
+        <img src="../assets/icons/sunset.svg" alt="sunset icon">
       </span>
       <strong>Sun Set </strong> : {{ sunset }}
     </p>
@@ -32,6 +32,29 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scpoed>
+  .sun_timings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    .sunrise,
+    .sunset {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sunrise {
+      margin-right: 32px;
+    }
+
+    .svg_container {
+      height: 30px;
+      margin-right: 16px;
+      img {
+        height: 100%;
+      }
+    }
+  }
 </style>

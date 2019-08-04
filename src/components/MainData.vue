@@ -20,6 +20,9 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="scss">
+  header {
+    height: 40%;
+    margin-top: 8%;
+  }
 </style>
