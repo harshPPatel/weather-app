@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <Navbar :location="address" v-on:refresh="getWeatherData" />
-    <main-data :forecast="forecast" v-if="forecast" />
-    <week-data-list v-if="forecast" :dailyData="forecast.daily.data" />
+    <div class="main_overlay">
+      <div class="container">
+        <Navbar :location="address" v-on:refresh="getWeatherData" />
+        <main-data :forecast="forecast" v-if="forecast" />
+        <week-data-list v-if="forecast" :dailyData="forecast.daily.data" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -135,5 +139,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  overflow: hidden;
+  #app {
+    height: 100%;
+    width: 100%;
+    background: url('./assets/bg.jpg') center center no-repeat;
+    background-size: cover;
+    .main_overlay {
+      height: 100%;
+      width: 100%;
+      background: #4776E6;
+      background: -webkit-linear-gradient(to left, #8E54E9, #4776E6);
+      background: linear-gradient(to left, #8E54E9, #4776E6);
+      opacity: 0.85;
+      * {
+        color: #fff;
+      }
+      .container {
+        width: 95%;
+        max-width: 1250px;
+        margin: 0 auto;
+      }
+    }
+  }
 }
 </style>

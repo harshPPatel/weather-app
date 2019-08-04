@@ -16,10 +16,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 60px;
+
+    .logo {
+      height: 40px;
+      a {
+        img {
+          height: 40px;
+        }
+      }
+    }
   }
 </style>
