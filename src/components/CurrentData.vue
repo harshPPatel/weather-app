@@ -3,9 +3,7 @@
     <div class="main_info_section">
       <div class="icon" id="main_icon">
         <div class="svg_container">
-          <weather-icon
-            :icon="icon"
-          />
+          <weather-icon :icon="icon" />
         </div>
       </div>
       <div class="temp">

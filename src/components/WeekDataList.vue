@@ -23,6 +23,16 @@ export default {
 
 <style lang="scss" scoped>
   .container {
-    padding-top: 8%;
+    padding-top: 10%;
+    .week_data_list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media (max-width: 1366px) {
+        width: 100%;
+        overflow-x: auto;
+      }
+    }
   }
 </style>
