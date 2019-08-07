@@ -9,9 +9,9 @@
         </div>
         <div class="body">
           <p class="day">{{ day }}</p>
-          <p class="date">{{ date }}</p>
+          <p class="date">( {{ date }} )</p>
           <weather-icon :icon="icon" />
-          <!-- <p class="summary">{{ dayData.summary }}</p> -->
+          <p class="summary">{{ dayData.summary }}</p>
           <div class="other_info">
             <p><strong>Min Temp : </strong>{{ info.lowTemp }}&deg; C</p>
             <p><strong>Max Temp : </strong>{{ info.highTemp }}&deg; C</p>
@@ -82,9 +82,50 @@ export default {
     }
     .content {
       background-color: #fff;
+      max-width: 400px;
+      width: 95%;
+      padding: 12px 16px 32px;
+      font-weight: normal;
       * {
         color: #221814!important;
       }
+      .day {
+        font-weight: bold;
+        font-size: 24px;
+      }
+      .summary,
+      .day {
+        text-decoration: underline;
+      }
+      i {
+        font-size: 100px;
+        margin: 32px 0;
+        @media (max-width: 400px) {
+          margin: 32px 0 16px;
+        }
+      }
+      .summary {
+        margin-bottom: 16px;
+      }
+      .other_info {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        @media (max-width: 400px) {
+          flex-direction: column;
+          p {
+            width: 100%!important;
+          }
+        }
+        p:not(:last-of-type) {
+          width: 50%;
+          margin-bottom: 8px;
+        }
+      }
+    }
+    .modal_header {
+      text-align: right;
     }
   }
 </style>
