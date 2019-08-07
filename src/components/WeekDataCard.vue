@@ -2,7 +2,7 @@
   <li @click="toggleModal">
     <p class="day">{{ day }}</p>
     <weather-icon :icon="icon" />
-    <p class="temp">{{ temp }}<span>&deg;</span> C</p>
+    <p class="temp">{{ this.dayData.temperatureHigh.toFixed(0) }}<span>&deg;</span> C</p>
     <modal
       v-if="isModalOpen"
       :day="day"
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { tempConverter } from '../lib/Converter';
 import Icon from '../lib/Icon';
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
 import Modal from './Modal.vue';
@@ -21,7 +20,6 @@ export default {
   props: ['dayData'],
   data: () => ({
     day: '',
-    temp: '',
     icon: '',
     isModalOpen: false,
   }),
@@ -30,18 +28,15 @@ export default {
     Modal,
   },
   created() {
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(this.dayData.time * 1000);
     this.day = days[date.getDay()];
-    this.temp = tempConverter(this.dayData.temperatureHigh);
+    this.icon = Icon.getIconName(this.dayData.icon);
   },
   methods: {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
     },
-  },
-  mounted() {
-    this.icon = Icon.getIconName(this.dayData.icon);
   },
 };
 </script>

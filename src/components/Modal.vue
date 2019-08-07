@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-if="dayData">
     <div class="overlay">
       <div class="content">
         <div class="modal_header">
@@ -11,13 +11,13 @@
           <p class="day">{{ day }}</p>
           <p class="date">{{ date }}</p>
           <weather-icon :icon="icon" />
-          <p class="summary">{{ dayData.summary }}</p>
+          <!-- <p class="summary">{{ dayData.summary }}</p> -->
           <div class="other_info">
-            <p><strong>Min Temp : </strong>{{ dayData.temperatureMin }}&deg; C</p>
-            <p><strong>Max Temp : </strong>{{ dayData.temperatureMax }}&deg; C</p>
-            <p><strong>Humidity : </strong>{{ dayData.humidity }}Format Value</p>
-            <p><strong>Pressure : </strong>{{ dayData.pressure }}Format Value</p>
-            <p><strong>Wind Speed : </strong>{{ dayData.windSpeed }}Format Value</p>
+            <p><strong>Min Temp : </strong>{{ info.lowTemp }}&deg; C</p>
+            <p><strong>Max Temp : </strong>{{ info.highTemp }}&deg; C</p>
+            <p><strong>Humidity : </strong>{{ info.humidity }}%</p>
+            <p><strong>Pressure : </strong>{{ info.pressure }} kPa</p>
+            <p><strong>Wind Speed : </strong>{{ info.windSpeed }} Km/h</p>
           </div>
         </div>
       </div>
@@ -26,7 +26,6 @@
 </template>
 
 <script>
-// import { tempConverter } from '../lib/Converter';
 import Icon from '../lib/Icon';
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
 
@@ -36,12 +35,32 @@ export default {
   data: () => ({
     date: '',
     icon: '',
+    info: {
+      highTemp: '',
+      lowTemp: '',
+      humidity: '',
+      pressure: '',
+      windSpeed: '',
+    },
   }),
   components: {
     WeatherIcon,
   },
   created() {
+    const date = new Date(this.dayData.time * 1000);
+    const stringDate = date.toDateString();
+    this.date = stringDate.substring(stringDate.indexOf(' '), stringDate.length);
     this.icon = Icon.getIconName(this.dayData.icon);
+    const pressure = (this.dayData.pressure / 10);
+    const wind = (this.dayData.windSpeed * 3.6);
+    const info = {
+      highTemp: this.dayData.temperatureHigh,
+      lowTemp: this.dayData.temperatureLow,
+      humidity: Math.round(this.dayData.humidity * 100),
+      pressure: pressure % 1 === 0 ? pressure : pressure.toFixed(1),
+      windSpeed: wind % 1 === 0 ? wind : wind.toFixed(1),
+    };
+    this.info = info;
   },
 };
 </script>

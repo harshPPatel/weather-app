@@ -5,7 +5,7 @@ const LOCATION_API_URL = `${PROXY}https://darksky.net/rgeo?hires=1`;
 const DARK_SKY_API_URL = `${PROXY}https://api.darksky.net/forecast/${API_KEY}`;
 
 const getWeather = (lang, lat) => {
-  const URL = `${DARK_SKY_API_URL}/${lat},${lang}`;
+  const URL = `${DARK_SKY_API_URL}/${lat},${lang}?units=si`;
   return fetch(URL)
     .then(res => res.json());
 };

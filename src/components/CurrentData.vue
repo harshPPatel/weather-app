@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="temp">
-        <h1>{{ temp }}<span>&deg;</span> C</h1>
+        <h1>{{ forecast.currently.temperature.toFixed(0) }}<span>&deg;</span> C</h1>
         <p>{{ forecast.currently.summary }}</p>
       </div>
     </div>
@@ -21,7 +21,6 @@
 
 <script>
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
-import { tempConverter } from '../lib/Converter';
 import Icon from '../lib/Icon';
 
 export default {
@@ -31,14 +30,12 @@ export default {
     WeatherIcon,
   },
   data: () => ({
-    temp: '',
     humidity: '',
     pressure: '',
     wind: '',
     icon: '',
   }),
   mounted() {
-    this.temp = tempConverter(this.forecast.currently.temperature);
     this.humidity = Math.round(this.forecast.currently.humidity * 100);
     const pressure = (this.forecast.currently.pressure / 10);
     this.pressure = pressure % 1 === 0 ? pressure : pressure.toFixed(1);

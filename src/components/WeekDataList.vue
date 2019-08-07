@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="week_data_list">
       <week-data-card
-        v-for="day in dailyData"
+        v-for="day in filteredData"
         :key="day.time"
         :dayData="day" />
     </ul>
@@ -15,6 +15,12 @@ import WeekDataCard from './WeekDataCard.vue';
 export default {
   name: 'WeekDataList',
   props: ['dailyData'],
+  data: () => ({
+    filteredData: [],
+  }),
+  created() {
+    this.filteredData = this.dailyData.filter((data, index) => index !== 0);
+  },
   components: {
     WeekDataCard,
   },
