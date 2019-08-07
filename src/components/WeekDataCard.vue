@@ -1,14 +1,19 @@
 <template>
-  <li>
+  <li @click="toggleModal">
     <p class="day">{{ day }}</p>
     <weather-icon :icon="icon" />
     <p class="temp">{{ temp }}<span>&deg;</span> C</p>
+    <modal
+      v-if="isModalOpen"
+      :day="day"
+      :dayData="dayData" />
   </li>
 </template>
 
 <script>
 import { tempConverter } from '../lib/Converter';
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
+import Modal from './Modal.vue';
 
 export default {
   name: 'WeekDataCard',
@@ -17,15 +22,22 @@ export default {
     day: '',
     temp: '',
     icon: '',
+    isModalOpen: false,
   }),
   components: {
     WeatherIcon,
+    Modal,
   },
   created() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const date = new Date(this.dayData.time * 1000);
     this.day = days[date.getDay()];
     this.temp = tempConverter(this.dayData.temperatureHigh);
+  },
+  methods: {
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen;
+    },
   },
   mounted() {
     const { icon } = this.dayData;
