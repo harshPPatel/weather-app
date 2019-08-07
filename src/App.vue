@@ -166,5 +166,18 @@ body {
       }
     }
   }
+  footer {
+    position: fixed;
+    bottom: 10px;
+    right: 16px;
+    color: #fff;
+    a {
+      color: #fff;
+      transition: all 0.2s ease;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
 }
 </style>
