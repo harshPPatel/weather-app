@@ -22,6 +22,7 @@
 <script>
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
 import { tempConverter } from '../lib/Converter';
+import Icon from '../lib/Icon';
 
 export default {
   name: 'MainData',
@@ -43,34 +44,7 @@ export default {
     this.pressure = pressure % 1 === 0 ? pressure : pressure.toFixed(1);
     const wind = (this.forecast.currently.windSpeed * 3.6);
     this.wind = wind % 1 === 0 ? wind : wind.toFixed(1);
-    const { icon } = this.forecast.currently;
-    this.icon = icon;
-    switch (icon) {
-      case 'rain':
-        this.icon = 'raindrop';
-        break;
-      case 'clear-day':
-        this.icon = 'day-sunny';
-        break;
-      case 'clear-night':
-        this.icon = 'night-clear';
-        break;
-      case 'wind':
-        this.icon = 'windy';
-        break;
-      case 'partly-cloudy-day':
-        this.icon = 'day-cloudy';
-        break;
-      case 'partly-cloudy-night':
-        this.icon = 'night-alt-cloudy';
-        break;
-      case 'thunderstorm':
-        this.icon = 'lightning';
-        break;
-      default:
-        this.icon = icon;
-        break;
-    }
+    this.icon = Icon.getIconName(this.forecast.currently.icon);
   },
 };
 </script>

@@ -27,6 +27,7 @@
 
 <script>
 // import { tempConverter } from '../lib/Converter';
+import Icon from '../lib/Icon';
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
 
 export default {
@@ -38,6 +39,9 @@ export default {
   }),
   components: {
     WeatherIcon,
+  },
+  created() {
+    this.icon = Icon.getIconName(this.dayData.icon);
   },
 };
 </script>

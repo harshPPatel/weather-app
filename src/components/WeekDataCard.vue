@@ -12,6 +12,7 @@
 
 <script>
 import { tempConverter } from '../lib/Converter';
+import Icon from '../lib/Icon';
 import WeatherIcon from '../../node_modules/vue-weathericons/WeatherIcons.vue';
 import Modal from './Modal.vue';
 
@@ -40,34 +41,7 @@ export default {
     },
   },
   mounted() {
-    const { icon } = this.dayData;
-    this.icon = icon;
-    switch (icon) {
-      case 'rain':
-        this.icon = 'raindrop';
-        break;
-      case 'clear-day':
-        this.icon = 'day-sunny';
-        break;
-      case 'clear-night':
-        this.icon = 'night-clear';
-        break;
-      case 'wind':
-        this.icon = 'windy';
-        break;
-      case 'partly-cloudy-day':
-        this.icon = 'day-cloudy';
-        break;
-      case 'partly-cloudy-night':
-        this.icon = 'night-alt-cloudy';
-        break;
-      case 'thunderstorm':
-        this.icon = 'lightning';
-        break;
-      default:
-        this.icon = icon;
-        break;
-    }
+    this.icon = Icon.getIconName(this.dayData.icon);
   },
 };
 </script>
