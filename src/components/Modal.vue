@@ -47,6 +47,7 @@ export default {
     WeatherIcon,
   },
   created() {
+    // Converting units of different values
     const date = new Date(this.dayData.time * 1000);
     const stringDate = date.toDateString();
     this.date = stringDate.substring(stringDate.indexOf(' '), stringDate.length);

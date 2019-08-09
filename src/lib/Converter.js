@@ -1,3 +1,4 @@
+// Converts unix timestamp in string format
 export const dateConverter = (unixDate) => {
   // Date Object
   const date = new Date(unixDate * 1000);
@@ -18,9 +19,7 @@ export const dateConverter = (unixDate) => {
   return `${hours}:${minutes} ${timePeriod}`;
 };
 
-export const tempConverter = fTemp => (((fTemp - 32) * (5 / 9)).toFixed(0));
-
+// Exporting object with method
 export default {
   dateConverter,
-  tempConverter,
 };

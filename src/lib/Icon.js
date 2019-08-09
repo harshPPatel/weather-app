@@ -1,3 +1,4 @@
+// Gets icon name according to weather-icon component
 const getIconName = (icon) => {
   let iconName = '';
   switch (icon) {
@@ -29,6 +30,7 @@ const getIconName = (icon) => {
   return iconName;
 };
 
+// Exporting object with method
 export default {
   getIconName,
 };

@@ -26,6 +26,7 @@ export default {
     sunset: '',
   }),
   created() {
+    // Converting time in string format
     this.sunrise = dateConverter(this.forecast.daily.data[0].sunriseTime);
     this.sunset = dateConverter(this.forecast.daily.data[0].sunsetTime);
   },

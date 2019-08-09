@@ -32,6 +32,7 @@ export default {
     WeekDataList,
   },
   methods: {
+    // Fetches weather data and sets to state/data
     async getWeatherData() {
       await API.getWeather(this.location.lang, this.location.lat)
         .then((res) => {
@@ -39,6 +40,7 @@ export default {
           this.saveDataToLocalStorage();
         });
     },
+    // Saves data to localStorage
     saveDataToLocalStorage() {
       const location = {
         lat: this.location.lat,
@@ -49,6 +51,7 @@ export default {
       localStorage.setItem('forecast', JSON.stringify(this.forecast));
       localStorage.setItem('timestamp', new Date());
     },
+    // Fetching data from localStorage or from API
     fetchData(res) {
       // Setting data
       this.location.lat = res.coords.latitude;
@@ -97,6 +100,7 @@ export default {
       // Fetching data from API
       this.getWeatherData();
     },
+    // Setting default data
     setDefaultData() {
       const localLocation = localStorage.getItem('location');
       if (localLocation) {
@@ -121,6 +125,8 @@ export default {
     }
     const date = new Date();
     const el = document.getElementById('color_target');
+
+    // Adding dark class in night time
     if (date.getHours() >= 20 || date.getHours() <= 6) {
       el.classList.add('dark');
     } else {
@@ -128,6 +134,7 @@ export default {
     }
   },
   updated() {
+    // Saving data to localStorage whenever data is changed
     this.saveDataToLocalStorage();
   },
 };

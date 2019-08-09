@@ -34,6 +34,7 @@ export default {
     this.icon = Icon.getIconName(this.dayData.icon);
   },
   methods: {
+    // Toggles the modal of the card
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
     },

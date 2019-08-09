@@ -19,6 +19,8 @@ export default {
     filteredData: [],
   }),
   created() {
+    // Removing first daily data as it is for the same day when data is requested
+    // from API
     this.filteredData = this.dailyData.filter((data, index) => index !== 0);
   },
   components: {
