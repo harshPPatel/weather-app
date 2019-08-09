@@ -1,0 +1,12 @@
+{
+  "name": "weather-app",
+  "version": 2,
+  "builds": [
+    {
+      "src": "dest/**",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "dest/$1" }],
+  "alias": ["weather-app.now.sh"]
+}
