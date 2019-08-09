@@ -139,11 +139,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  min-height: 100vh;
+  min-height: 800px;
   height: 100vh;
   min-width: 100vw;
   width: 100vw;
-  overflow: hidden;
+  overflow: auto;
+  position: relative;
+  @media (max-width: 375px) {
+    min-height: 725px;
+  }
   #app {
     height: 100%;
     width: 100%;
@@ -167,7 +171,7 @@ body {
     }
   }
   footer {
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     right: 16px;
     color: #fff;

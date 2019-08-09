@@ -37,6 +37,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      .sunrise {
+        margin-right: 0!important;
+        margin-bottom: 16px;
+      }
+    }
 
     .sunrise,
     .sunset {

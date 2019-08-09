@@ -54,6 +54,14 @@ export default {
     margin-top: 70px;
     margin-bottom: 40px;
 
+    @media (max-width: 468px) {
+      margin-bottom: 70px;
+    }
+    @media (max-width: 375px) {
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
+
     .icon {
       margin-right: 32px;
       i {
@@ -81,6 +89,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      p:not(:last-of-type) {
+        margin-right: 0!important;
+        margin-bottom: 16px;
+      }
+    }
+
     p:not(:last-of-type) {
       margin-right: 24px;
     }
