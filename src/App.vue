@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="main_overlay">
+    <div class="main_overlay" id="color_target">
       <div class="container">
         <Navbar :location="address" v-on:refresh="getWeatherData" />
         <main-data :forecast="forecast" v-if="forecast" />
@@ -119,6 +119,13 @@ export default {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.fetchData, this.setDefaultData);
     }
+    const date = new Date();
+    const el = document.getElementById('color_target');
+    if (date.getHours() >= 20 || date.getHours() <= 6) {
+      el.classList.add('dark');
+    } else {
+      el.classList.remove('dark');
+    }
   },
   updated() {
     this.saveDataToLocalStorage();
@@ -160,6 +167,13 @@ body {
       background: -webkit-linear-gradient(to left, #8E54E9, #4776E6);
       background: linear-gradient(to left, #8E54E9, #4776E6);
       opacity: 0.95;
+
+      &.dark {
+        background: #141414;
+        background: -webkit-linear-gradient(to right, #000000, #141414);
+        background: linear-gradient(to right, #000000, #141414);
+      }
+
       * {
         color: #fff;
       }
